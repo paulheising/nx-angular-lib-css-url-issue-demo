@@ -122,6 +122,48 @@
       },
       "tags": [],
       "implicitDependencies": ["demo-app"]
+    },
+    "demo-lib": {
+      "projectType": "library",
+      "root": "libs/demo-lib",
+      "sourceRoot": "libs/demo-lib/src",
+      "prefix": "ng-package-demo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/demo-lib"],
+          "options": {
+            "project": "libs/demo-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/demo-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/demo-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/demo-lib"],
+          "options": {
+            "jestConfig": "libs/demo-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/demo-lib/src/**/*.ts",
+              "libs/demo-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
